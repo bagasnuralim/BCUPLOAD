@@ -34,6 +34,37 @@
 			//mengembalikan data error
 			return $error;	
 		}
+		public function addpeminjaman(){
+			$db = new Database();
+			$dbconnect = $db->connect();
+			$sql = "INSERT INTO peminjaman 
+				(id_peminjaman,
+				tanggal_peminjaman,
+				nama_arsip,
+				tanggal_pengembalian,
+				nama_peminjam,
+				keterangan
+				)
+				Values
+				( '{$this->id_peminjaman}',
+				  '{$this->tanggal_peminjaman}',
+				  '{$this->nama_arsip}',
+				  '{$this->tanggal_pengembalian}',
+				  '{$this->nama_peminjam}',
+				  '{$this->keterangan}'
+				)";
+			//eksekusi query diatas
+			$data=$dbconnect->query($sql);
+			if($sql="SELECT FROM peminjaman")
+
+			//menampung data eror
+			$error =$dbconnect->error;
+
+			//menutup koneksi
+			$dbconnect=$db->close();
+			//mengembalikan data error
+			return $error;	
+		}
 		public function InReminder2(){
 			$db = new Database();
 			$dbconnect = $db->connect();
@@ -149,6 +180,14 @@
 			$dbConnect = $db->close();	
 			return $data->fetch_array();			
 		}
+		public function getDetailPeminjaman ($id_peminjaman) {
+			$db = new Database();	
+			$dbConnect = $db->connect();
+			$sql = "SELECT * FROM peminjaman where id_peminjaman = '{$id_peminjaman}'"; 
+			$data = $dbConnect->query($sql);
+			$dbConnect = $db->close();	
+			return $data->fetch_array();			
+		}
 		public function getDataLogin() {
 			$db = new Database();
 			$dbConnect = $db->connect();
@@ -177,27 +216,27 @@
 			return $data;
 		}
 		
-		public function hitungsp(){
+		public function hitungArsipDipinjam(){
 			$db = new Database();
 			//membuka koneksi
 			$dbConnect = $db->connect();
-			$data = mysqli_query($dbConnect,"SELECT * FROM upload_sp");
+			$data = mysqli_query($dbConnect,"SELECT * FROM peminjaman where CURRENT_DATE <= `tanggal_pengembalian`");
 			$jumlah = mysqli_num_rows($data);
 			echo $jumlah;
 		}
-		public function hitungbm(){
+		public function hitungArsipNonAktif(){
 			$db = new Database();
 			//membuka koneksi
 			$dbConnect = $db->connect();
-			$data = mysqli_query($dbConnect,"SELECT * FROM upload_bm");
+			$data = mysqli_query($dbConnect,"SELECT * FROM upload_sp where `tanggal_expired` <= CURRENT_DATE");
 			$jumlah = mysqli_num_rows($data);
 			echo $jumlah;
 		}
-		public function hitungbk(){
+		public function hitungArsipAktif(){
 			$db = new Database();
 			//membuka koneksi
 			$dbConnect = $db->connect();
-			$data = mysqli_query($dbConnect,"SELECT * FROM upload_bk");
+			$data = mysqli_query($dbConnect,"SELECT * FROM upload_sp where  CURRENT_DATE <= `tanggal_expired`");
 			$jumlah = mysqli_num_rows($data);
 			echo $jumlah;
 		}
@@ -242,10 +281,10 @@
 			return $error;
 		}
 
-			public function getDR2(){
+			public function getDR1(){
 				$db = new Database();
 				$dbConnect = $db->connect();
-				$sql = "SELECT * FROM upload_sp where tgl_p2 = '{$tgl_p2}'";
+				$sql = "SELECT * FROM upload_sp where tgl_p2 <= '{$date}'";
 				$data = $dbConnect->query($sql);
 				$dbConnect = $db->close();
 				return $data;
@@ -259,6 +298,7 @@
 				$dbConnect = $db->close();
 				return $data;
 			}
+			
 	}
 
 ?>

@@ -1,5 +1,8 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <?php
+	include('class/connect.php'); 
+?>
+<?php
     if(!isset($_SESSION)) 
     { 
         session_start(); 
@@ -10,7 +13,14 @@
   $pengarsipan = new pengarsipan();    
 
     $tgl = date("Y-m-d");
-    
+    $penerima = "bagasnuralim@gmail.com";
+    $judul = "Reminder Surat Aktif";
+    $isi = "Segera cek arsip surat aktif";
+    $header = "From: 160613012@lpkia.ac.id\r\n".
+              "Replay-to: 160613012@lpkia.ac.id\r\n".
+              "Cc: bagasnuralim@gmail.com";
+
+    mail($penerima,$judul,$isi,$header);
 
       $result = $pengarsipan->getDataSp();
         while ($data = $result->fetch_assoc()) {
@@ -23,7 +33,7 @@
                                           setTimeout(function () {    
                                               swal({
                                                   title: 'Peringatan Arsip Expired !',
-                                                  text:  'Cek Arsip Surat Perizinan',
+                                                  text:  'Cek Arsip Surat Aktif',
                                                   icon: 'info',
                                                  
                                                   animation : 'slideInUp',
@@ -37,7 +47,7 @@
                           setTimeout(function () {    
                               swal({
                                   title: 'Peringatan Arsip Expired !',
-                                  text:  'Cek Arsip Surat Perizinan',
+                                  text:  'Cek Arsip Surat Aktif',
                                   icon: 'warning',
                                 
                                   animation : 'slideInUp',
@@ -69,11 +79,11 @@
               <div class="panel-heading">
                 <div class="row">
                   <div class="col-xs-6">
-                    <i class="fa fa-envelope fa-5x"></i>
+                    <i class="fa fa-file-alt fa-5x"></i>
                   </div>
                   <div class="col-xs-6 text-right">
-                    <p class="announcement-heading"><?php echo $data = $pengarsipan->hitungsp();; ?></p>
-                    <p class="announcement-text">Jumlah Surat Perizinan</p>
+                    <p class="announcement-heading"><?php echo $data = $pengarsipan->hitungArsipAktif();; ?></p>
+                    <p class="announcement-text">Jumlah Arsip Aktif</p>
                   </div>
                 </div>
               </div>
@@ -81,7 +91,7 @@
                 <div class="panel-footer announcement-bottom">
                   <div class="row">
                     <div class="col-xs-6">
-                      View Arsip Surat Perizinan
+                      View Arsip Surat Aktif
                     </div>
                     <div class="col-xs-6 text-right">
                       <i class="fa fa-arrow-circle-right"></i>
@@ -96,11 +106,11 @@
               <div class="panel-heading">
                 <div class="row">
                   <div class="col-xs-6">
-                    <i class="fa fa-backward fa-5x"></i>
+                    <i class="fa fa-fire fa-5x"></i>
                   </div>
                   <div class="col-xs-6 text-right">
-                    <p class="announcement-heading"><?php echo $data = $pengarsipan->hitungbk();; ?></p>
-                    <p class="announcement-text">Jumlah Arsip Surat Keluar</p>
+                    <p class="announcement-heading"><?php echo $data = $pengarsipan->hitungArsipNonAktif();; ?></p>
+                    <p class="announcement-text">Jumlah Arsip Expired</p>
                   </div>
                 </div>
               </div>
@@ -108,7 +118,7 @@
                 <div class="panel-footer announcement-bottom">
                   <div class="row">
                     <div class="col-xs-6">
-                      View Arsip Surat Keluar
+                      View Arsip Expired
                     </div>
                     <div class="col-xs-6 text-right">
                       <i class="fa fa-arrow-circle-right"></i>
@@ -123,11 +133,11 @@
               <div class="panel-heading">
                 <div class="row">
                   <div class="col-xs-6">
-                    <i class="fa fa-forward fa-5x"></i>
+                    <i class="fa fa-handshake fa-5x"></i>
                   </div>
                   <div class="col-xs-6 text-right">
-                    <p class="announcement-heading"><?php echo $data = $pengarsipan->hitungbm();; ?></p>
-                    <p class="announcement-text">Jumlah Arsip Surat Masuk</p>
+                    <p class="announcement-heading"><?php echo $data = $pengarsipan->hitungArsipDipinjam();; ?></p>
+                    <p class="announcement-text">Jumlah Arsip Di Pinjam</p>
                   </div>
                 </div>
               </div>
@@ -135,7 +145,7 @@
                 <div class="panel-footer announcement-bottom">
                   <div class="row">
                     <div class="col-xs-6">
-                      View Arsip Surat Masuk
+                      View Arsip Di Pinjam
                     </div>
                     <div class="col-xs-6 text-right">
                       <i class="fa fa-arrow-circle-right"></i>
@@ -166,4 +176,6 @@
                                           </script>"; -->
           </div>
         </div><!-- /.row -->
+        <div class="row">
+        
 </div>

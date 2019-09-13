@@ -76,7 +76,7 @@
 					$kate = $_GET['kategori'];
 					$data = mysql_query("SELECT * FROM upload_sp WHERE kategori LIKE '%".$kate."%'");
 				}else{
-					$data = mysql_query("SELECT * FROM upload_sp where  CURRENT_DATE <= `tanggal_expired`");
+					$data = mysql_query("SELECT * FROM upload_sp where `tanggal_expired` <= CURRENT_DATE ");
 				}
 
 				while($da = mysql_fetch_array($data)){
@@ -86,10 +86,10 @@
 					<td align="left"><?php echo $da['nama_file']; ?></td>
 					<td align="center"><?php echo $da['tanggal_expired']; ?></td>
 					<td width="10" align="center"><?php 
-						if($date <= $da['tanggal_expired'] && $date >= $da['tgl_p1'] ){
-							echo '<i class="fa fa-exclamation-triangle fa-2x"></i>';
-						}else{
+						if($date <= $da['tanggal_expired']){
 							echo '<i class="fa fa-check-square fa-2x"></i>';
+						}else{
+							echo '<i class="fa fa-window-close fa-2x"></i>';
 						}
 					?></td>
 					<td width="50" align="center"><a href="<?php echo $da['file']; ?>" class="btn btn-primary">Download</a></td>

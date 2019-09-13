@@ -11,10 +11,10 @@
           <ol class="breadcrumb">
             <li><a href="application.php"><i class="fa fa-tachometer-alt"></i> Dashboard</a></li>
             <li><a href="#"><i class="fa fa-edit"></i> Input Arsip</a></li>
-            <li><i class="fa fa-pencil-alt "></i> Form Surat Perizinan</li>
+            <li><i class="fa fa-pencil-alt "></i> Form Surat Aktif</li>
           </ol>
           <div class="row">
-          <div class="col-lg-8"><h3 style="color : #337ab7;">Form Surat Perizinan</h3></div>
+          <div class="col-lg-8"><h3 style="color : #337ab7;">Form Surat Aktif</h3></div>
           
         </div>
         <hr>

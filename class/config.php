@@ -27,6 +27,8 @@
 		    return round($bytes, $precision) . ' ' . $units[$pow]; 
 		}
 
+		
+
 		function rupiah($biaya){
 					$hasil = "Rp ". number_format($biaya,2,',','.');
 					return $hasil;

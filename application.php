@@ -46,22 +46,34 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav side-nav">
             <li class=""><a href="application.php?page=halamanutama"><i class="fa fa-tachometer-alt"></i> Dashboard</a></li>
+            <?php if ($_SESSION['hak'] == 'admin') { ?>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-edit"></i> Input Arsip <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="application.php?page=form-sp"><i class="fas fa-envelope"></i> &nbsp Surat Perizinan</a></li>
+                <li><a href="application.php?page=form-sp"><i class="fas fa-envelope"></i> &nbsp Surat Aktif</a></li>
                 <li><a href="application.php?page=form-bm"><i class="fa fa-forward"></i> &nbsp Surat Masuk</a></li>
                 <li><a href="application.php?page=bake"><i class="fa fa-backward"></i> &nbsp Surat Keluar</a></li>
               </ul>
             </li>
+            <?php } ?> 
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Menampilkan Data <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="application.php?page=datasp"><i class="fa fa-envelope"></i> &nbsp Surat Perizinan</a></li>
+                <li><a href="application.php?page=datasp"><i class="fa fa-envelope"></i> &nbsp Surat Aktif</a></li>
                 <li><a href="application.php?page=databm"><i class="fa fa-forward"></i> &nbsp Surat Masuk</a></li>
                 <li><a href="application.php?page=databk"><i class="fa fa-backward"></i> &nbsp Surat Keluar</a></li>
               </ul>
             </li>
+            <?php if ($_SESSION['hak'] == 'admin') { ?>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Peminjaman Arsip <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="application.php?page=addpeminjaman"><i class="fa fa-envelope"></i> &nbsp Input Data Peminjaman</a></li>
+                <li><a href="application.php?page=datap"><i class="fa fa-forward"></i> &nbsp Data Peminjaman Arsip</a></li>
+                <li><a href="application.php?page=dataex"><i class="fa fa-backward"></i> &nbsp Data Arsip Expired</a></li>
+              </ul>
+            </li>
+            <?php } ?> 
             <!-- <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-clipboard-list"></i> Reminder <b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -82,7 +94,7 @@
 
           <ul class="nav navbar-nav navbar-right navbar-user">
             <li class="dropdown user-dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $_SESSION['nama']; ?> <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"> </i> <?php echo $_SESSION['nama']; ?> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="application.php?page=profileusers&username=<?php echo $data['username'];?>"><i class="fa fa-user"></i> &nbsp Profile</a></li>
                 <li><a href=""><i class="fa fa-cogs"></i>&nbsp Setting</a></li>
@@ -122,8 +134,17 @@
         if($page=="datasp") {
           include "pages/data/Viewsp.php";
         }
+        if($page=="datap") {
+          include "pages/data/ViewPeminjaman.php";
+        }
+        if($page=="dataex") {
+          include "pages/data/ViewsEx.php";
+        }
         if($page=="detailsp") {
           include "pages/data/Detailsp.php";
+        }
+        if($page=="detailp") {
+          include "pages/data/Detailp.php";
         }
         if($page=="detailbm") {
           include "pages/data/Detailbm.php";
@@ -142,6 +163,9 @@
         }
         if($page=="updateusers") {
           include "pages/form/form-updateusers.php";
+        }
+        if($page=="addpeminjaman") {
+          include "pages/form/form-peminjaman.php";
         }
         if($page=="deleteusers") {
           include "controllers/users/delete.php";

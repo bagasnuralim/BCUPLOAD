@@ -10,7 +10,7 @@
 	if(!$error){
 		//memanggil tampilan data
 		
-		echo 'Akun telah terhapus';
+		echo '<h3>Akun telah terhapus</h3> <td width="50" align="center"><a href="application.php?page=datausers" class="btn btn-primary">Kembali</a></td>';
 		//header("location: ../../application.php?page=datausers");
 	} else {
 		//membuat session untuk menampilkan pesan error bernama message 
