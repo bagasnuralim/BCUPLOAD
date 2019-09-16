@@ -13,15 +13,6 @@
   $pengarsipan = new pengarsipan();    
 
     $tgl = date("Y-m-d");
-    $penerima = "bagasnuralim@gmail.com";
-    $judul = "Reminder Surat Aktif";
-    $isi = "Segera cek arsip surat aktif";
-    $header = "From: 160613012@lpkia.ac.id\r\n".
-              "Replay-to: 160613012@lpkia.ac.id\r\n".
-              "Cc: bagasnuralim@gmail.com";
-
-    mail($penerima,$judul,$isi,$header);
-
       $result = $pengarsipan->getDataSp();
         while ($data = $result->fetch_assoc()) {
 
